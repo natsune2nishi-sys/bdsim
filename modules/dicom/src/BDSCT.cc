@@ -44,8 +44,9 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 BDSCT::BDSCT(const G4String& nameIn,
              const G4String& dataFilePath,
-             const G4String& dataFileName):
-  BDSAcceleratorComponent(nameIn, 1, 0, "ct"),
+             const G4String& dataFileName,
+             const G4double& arclengthIn):
+  BDSAcceleratorComponent(nameIn, arclengthIn, 0, "ct"),
   dicomDataPath(dataFilePath),
   dicomDataFile(dataFileName)
 {
@@ -1296,6 +1297,12 @@ void BDSCT::ReadPhantomData()
   ReadVoxelDensities(fin);
   
   fin.close();
+  G4double CTFullLengthZ = fMaxZ - fMinZ;
+  if (arcLength < CTFullLengthZ)
+	{
+		G4String message = "Unphysical length set for component named \"" + name + "\" with length " + std::to_string(arcLength) + " is shorter than the total CT thickness: " + std::to_string(CTFullLengthZ);
+		throw BDSException(name, message);
+	}
 }
 
 void BDSCT::ReadVoxelDensities(std::ifstream& fin)

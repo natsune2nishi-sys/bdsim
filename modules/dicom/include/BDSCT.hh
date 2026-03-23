@@ -56,7 +56,8 @@ public:
   BDSCT() = delete; ///< No default constructor.
   BDSCT(const G4String& nameIn,
         const G4String& dicomDataPath,
-        const G4String& dicomDataFile);
+        const G4String& dicomDataFile,
+        const G4double& arclengthIn);
 
   virtual ~BDSCT();
 

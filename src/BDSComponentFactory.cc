@@ -1859,7 +1859,8 @@ BDSAcceleratorComponent* BDSComponentFactory::CreateCT()
 
   BDSCT* result = new BDSCT(elementName,
 			    element->dicomDataPath,
-			    element->dicomDataFile);
+			    element->dicomDataFile,
+			    element->l*CLHEP::m);
   new BDSDicomIntersectVolume(); // TBC
 
   return result;
