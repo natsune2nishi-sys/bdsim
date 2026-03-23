@@ -94,6 +94,10 @@ New Options
 |                                     | the design rigidity for normalised fields             |
 |                                     | accordingly.                                          |
 +-------------------------------------+-------------------------------------------------------+
+| changeDicomMaterialDensity          | set to the minimum density difference before making a |
+|                                     | separate material when reading in DICOM voxel density |
+|                                     | information.                                          |
++-------------------------------------+-------------------------------------------------------+
 
 General Updates
 ---------------

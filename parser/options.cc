@@ -545,4 +545,7 @@ void Options::PublishMembers()
   publish("millichargeMass",     &Options::millichargeMass);
   publish("millichargeCharge" ,  &Options::millichargeCharge);
   publish("millichargeID",       &Options::millichargeID);
+
+  //DICOM imaging
+  publish("changeDicomMaterialDensity",       &Options::changeDicomMaterialDensity);
 }

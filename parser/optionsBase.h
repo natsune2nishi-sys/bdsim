@@ -434,6 +434,9 @@ namespace GMAD
     double millichargeCharge;
     int millichargeID;
 
+    //DICOM imaging
+    double changeDicomMaterialDensity;
+
     /// print some properties
     void print() const;
   

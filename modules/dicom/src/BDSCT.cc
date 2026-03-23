@@ -23,6 +23,8 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 #include "BDSDicomIntersectVolume.hh"
 #include "BDSDicomPhantomParameterisationColour.hh"
 #include "BDSExtent.hh"
+#include "BDSException.hh"
+#include "BDSGlobalConstants.hh"
 
 #include "G4Box.hh"
 #include "G4Colour.hh"
@@ -1309,11 +1311,8 @@ void BDSCT::ReadVoxelDensities(std::ifstream& fin)
       // Min and Max are inverted in this initialisation in order for the modification to take place systematically
       densiMinMax[ii] = std::pair<G4double, G4double>(DBL_MAX, -DBL_MAX);
     }
-  
-  char *part = std::getenv("DICOM_CHANGE_MATERIAL_DENSITY");
-  G4double densityDiff = -1.;
-  if (part)
-    densityDiff = G4UIcommand::ConvertToDouble(part);
+
+  G4double densityDiff = BDSGlobalConstants::Instance()->changeDicomMaterialDensity();
   
   std::map<G4int, G4double> densityDiffs;
   for (G4int ii = 0; ii < G4int(thePhantomMaterialsOriginal.size()); ++ii)

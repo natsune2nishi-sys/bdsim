@@ -3072,6 +3072,10 @@ described in :ref:`tunnel-geometry`.
 +----------------------------------+-------------------------------------------------------+
 | buildTunnel                      | Whether to build a tunnel (default = false)           |
 +----------------------------------+-------------------------------------------------------+
+| changeDicomMaterialDensity       | set to the minimum density difference before making a |
+|                                  | separate material when reading in DICOM voxel density |
+|                                  | information.                                          |
++----------------------------------+-------------------------------------------------------+
 | buildTunnelStraight              | Whether to build a tunnel, ignoring the beamline and  |
 |                                  | just in a straight line (default = false).            |
 +----------------------------------+-------------------------------------------------------+

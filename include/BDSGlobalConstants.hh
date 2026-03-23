@@ -368,6 +368,9 @@ public:
   inline G4double MillichargeCharge()        const {return G4double(options.millichargeCharge);}
   inline G4int    MillichargeID()            const {return G4int   (options.millichargeID);}
 
+  //DICOM imaging
+  inline G4double changeDicomMaterialDensity() const {return G4double(options.changeDicomMaterialDensity);}
+
   /// @{ options that require some implementation.
   G4bool StoreTrajectoryTransportationSteps() const;
   BDS::TrajectoryOptions StoreTrajectoryOptions() const;
