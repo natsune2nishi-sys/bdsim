@@ -204,10 +204,15 @@ void BDSDicomFileMgr::AddMaterial(std::vector<G4String> wl)
 {
   if (!theMaterials.empty() && bMaterialsDensity)
     {
-      G4Exception("DicomFileMgr::AddMaterial",
-		  "DFM005",
-		  FatalException,
-		  "Trying to add a Material with :MATE and another with :MATE_DENS, check your input file");
+  	//when :MATE initially and then :MATE_DENS is introduced
+  	G4String message = "Trying to add a Material with :MATE and another with :MATE_DENS, check your input file!";
+  	throw BDSException(__METHOD_NAME__, message);
+    }
+  if (!theMaterialsDensity.empty() && bMaterialsDensity)
+	{
+  	//when :MATE initially and then :MATE_DENS is introduced
+  	G4String message = "Trying to add a Material with :MATE_DENS and another with :MATE, check your input file!";
+  	throw BDSException(__METHOD_NAME__, message);
     }
   bMaterialsDensity = false;
   // Material (G4string) is associated with Hounsfield value (double???)
@@ -219,10 +224,15 @@ void BDSDicomFileMgr::AddMaterialDensity(std::vector<G4String> wl)
 {
   if (!theMaterialsDensity.empty() && !bMaterialsDensity)
     {
-      G4Exception("DicomFileMgr::AddMaterial",
-		  "DFM005",
-		  FatalException,
-		  "Trying to add a Material with :MATE and another with :MATE_DENS, check your input file");
+  	//when :MATE_DENS initially and then :MATE is introduced
+  	G4String message = "Trying to add a Material with :MATE and another with :MATE_DENS, check your input file";
+  	throw BDSException(__METHOD_NAME__, message); //TODO: can this refer to the element name instead of it being a direct string?
+    }
+  if (!theMaterials.empty() && bMaterialsDensity)
+	{
+  	//when :MATE initially and then :MATE_DENS is introduced
+  	G4String message = "Trying to add a Material with :MATE and another with :MATE_DENS, check your input file!";
+  	throw BDSException(__METHOD_NAME__, message); //TODO: can this refer to the element name instead of it being a direct string?
     }
   bMaterialsDensity = true;
   theMaterialsDensity[G4UIcommand::ConvertToDouble(wl[2])] = wl[1];
