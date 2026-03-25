@@ -45,6 +45,7 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "BDSDicomFileMgr.hh"
 #include "BDSDicomFileCT.hh"
+#include "BDSException.hh"
 
 #include "G4tgrFileIn.hh"
 #include "G4UIcommand.hh"
@@ -180,6 +181,12 @@ void BDSDicomFileMgr::AddFile(G4String fileName)
       auto *df = new BDSDicomFileCT(dset);
       df->ReadData();
       df->SetFileName(fileName);
+  	  // check for overlapping z position
+  	  if (theCTFiles.count(df->GetMaxZ()))
+  	  {
+  		  G4String message = "Two or more slices have the same z coordinate value of " + std::to_string(df->GetMaxZ());
+  		  throw BDSException(__METHOD_NAME__, message);
+  	  }
       // reorder by location
       theCTFiles[df->GetMaxZ()] = df;
       G4cout << "Number of voxels: " << df->GetNoVoxels() << G4endl;
