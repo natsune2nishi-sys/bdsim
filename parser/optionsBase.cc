@@ -396,6 +396,7 @@ OptionsBase::OptionsBase()
 
   //DICOM imaging
   changeDicomMaterialDensity = -1.0;
+  createDicomScorerMesh = true;
 }
 
 

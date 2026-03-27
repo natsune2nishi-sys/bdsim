@@ -57,7 +57,8 @@ public:
   BDSCT(const G4String& nameIn,
         const G4String& dicomDataPath,
         const G4String& dicomDataFile,
-        const G4double& arclengthIn);
+        const G4double& arclengthIn,
+        const G4String& dicomScorer);
 
   virtual ~BDSCT();
 
@@ -132,6 +133,7 @@ private:
   BDSDicomFileMgr* theFileMgr;
   G4String dicomDataPath;
   G4String dicomDataFile;
+  G4String dicomScorer;
 };
 
 #endif

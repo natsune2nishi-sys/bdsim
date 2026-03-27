@@ -370,6 +370,7 @@ public:
 
   //DICOM imaging
   inline G4double changeDicomMaterialDensity() const {return G4double(options.changeDicomMaterialDensity);}
+  inline G4bool createDicomScorerMesh() const {return G4bool(options.createDicomScorerMesh);}
 
   /// @{ options that require some implementation.
   G4bool StoreTrajectoryTransportationSteps() const;

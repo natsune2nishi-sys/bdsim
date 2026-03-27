@@ -45,10 +45,12 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 BDSCT::BDSCT(const G4String& nameIn,
              const G4String& dataFilePath,
              const G4String& dataFileName,
-             const G4double& arclengthIn):
+             const G4double& arclengthIn,
+             const G4String& dicomScorer):
   BDSAcceleratorComponent(nameIn, arclengthIn, 0, "ct"),
   dicomDataPath(dataFilePath),
-  dicomDataFile(dataFileName)
+  dicomDataFile(dataFileName),
+  dicomScorer(dicomScorer)
 {
   //--- As soon as the object is constructed, we retrieve data from the CT files
   theFileMgr = BDSDicomFileMgr::GetInstance();
@@ -1320,6 +1322,11 @@ void BDSCT::ReadVoxelDensities(std::ifstream& fin)
     }
 
   G4double densityDiff = BDSGlobalConstants::Instance()->changeDicomMaterialDensity();
+  if (densityDiff <= 0 && densityDiff != -1)
+  {
+  	G4String message = "ReadVoxelDensities: Non-default changeDicomMaterialDensity value should be greater than 0.";
+  	throw BDSException(name, message);
+  }
   
   std::map<G4int, G4double> densityDiffs;
   for (G4int ii = 0; ii < G4int(thePhantomMaterialsOriginal.size()); ++ii)

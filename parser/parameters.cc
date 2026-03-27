@@ -212,6 +212,7 @@ Parameters::Parameters()
 
   setMap["dicomDataPath"]  = false;
   setMap["dicomDataFile"]  = false;
+  setMap["dicomScorer"]    = false;
 
   setMap["colour"] = false;
 

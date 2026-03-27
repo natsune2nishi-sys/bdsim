@@ -548,4 +548,6 @@ void Options::PublishMembers()
 
   //DICOM imaging
   publish("changeDicomMaterialDensity",       &Options::changeDicomMaterialDensity);
+  publish("createDicomScorerMesh",       &Options::createDicomScorerMesh);
+
 }

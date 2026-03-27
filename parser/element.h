@@ -265,6 +265,7 @@ namespace GMAD
 
     std::string dicomDataPath; ///< for CT, file for DICOM construction data
     std::string dicomDataFile; ///< for CT, file for DICOM construction data
+    std::string dicomScorer; ///< Per CT, scorer for DICOM mesh data.
 
     /// Override colour for certain items
     std::string colour;

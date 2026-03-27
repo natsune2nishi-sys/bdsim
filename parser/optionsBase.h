@@ -436,6 +436,7 @@ namespace GMAD
 
     //DICOM imaging
     double changeDicomMaterialDensity;
+    bool createDicomScorerMesh;
 
     /// print some properties
     void print() const;

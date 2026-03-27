@@ -286,6 +286,7 @@ void Element::PublishMembers()
 
   publish("dicomDataPath",       &Element::dicomDataPath);
   publish("dicomDataFile",       &Element::dicomDataFile);
+  publish("dicomScorer",         &Element::dicomScorer);
 
   publish("colour",              &Element::colour);
   
@@ -711,6 +712,7 @@ void Element::flush()
   
   dicomDataFile = "";
   dicomDataPath = "";
+  dicomScorer = "";
   
   colour = "";
 

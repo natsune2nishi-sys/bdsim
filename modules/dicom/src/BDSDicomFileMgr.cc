@@ -226,13 +226,13 @@ void BDSDicomFileMgr::AddMaterialDensity(std::vector<G4String> wl)
     {
   	//when :MATE_DENS initially and then :MATE is introduced
   	G4String message = "Trying to add a Material with :MATE and another with :MATE_DENS, check your input file";
-  	throw BDSException(__METHOD_NAME__, message); //TODO: can this refer to the element name instead of it being a direct string?
+  	throw BDSException(__METHOD_NAME__, message);
     }
   if (!theMaterials.empty() && bMaterialsDensity)
 	{
   	//when :MATE initially and then :MATE_DENS is introduced
   	G4String message = "Trying to add a Material with :MATE and another with :MATE_DENS, check your input file!";
-  	throw BDSException(__METHOD_NAME__, message); //TODO: can this refer to the element name instead of it being a direct string?
+  	throw BDSException(__METHOD_NAME__, message);
     }
   bMaterialsDensity = true;
   theMaterialsDensity[G4UIcommand::ConvertToDouble(wl[2])] = wl[1];
