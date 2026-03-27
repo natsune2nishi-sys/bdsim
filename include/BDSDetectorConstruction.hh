@@ -264,6 +264,10 @@ private:
   /// Accelerator model pointer
   BDSAcceleratorModel* acceleratorModel;
 
+  /// per element scorer meshes
+  std::vector<GMAD::ScorerMesh> perElementScoringMeshes;
+  G4bool mesh_option;
+
   /// All fields
   std::vector<BDSFieldObjects*> fields;
 

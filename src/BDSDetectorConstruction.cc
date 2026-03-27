@@ -37,6 +37,8 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 #include "BDSCurvilinearBuilder.hh"
 #include "BDSDebug.hh"
 #include "BDSDetectorConstruction.hh"
+
+#include "BDSCT.hh"
 #include "BDSException.hh"
 #include "BDSExtent.hh"
 #include "BDSFieldBuilder.hh"
@@ -495,6 +497,16 @@ BDSBeamlineSet BDSDetectorConstruction::BuildBeamline(const GMAD::FastList<GMAD:
           BDSSamplerInfo* samplerInfo = forceNoSamplerOnThisElement ? nullptr : BuildSamplerInfo(&(*elementIt));
           BDSTiltOffset* tiltOffset = BDSComponentFactory::CreateTiltOffset(&(*elementIt));
           massWorld->AddComponent(temp, tiltOffset, samplerInfo, integral);
+
+          #ifdef USE_DICOM
+          mesh_option = BDSGlobalConstants::Instance()->createDicomScorerMesh();
+          if (mesh_option && temp->GetType() == "ct")
+          {
+            auto ct = dynamic_cast<BDSCT*>(temp);
+            auto mesh = ct->GetScorerMesh();
+            perElementScoringMeshes.push_back(mesh);
+          }
+          #endif
         }
     }
 
@@ -1367,8 +1379,22 @@ void BDSDetectorConstruction::ConstructScoringMeshes()
   std::vector<GMAD::ScorerMesh> scoringMeshes = BDSParser::Instance()->GetScorerMeshes();
   std::vector<GMAD::Scorer> scorers = BDSParser::Instance()->GetScorers();
 
+  scoringMeshes.insert(scoringMeshes.end(), perElementScoringMeshes.begin(), perElementScoringMeshes.end());
+
   if (scoringMeshes.empty())
     {return;}
+
+  std::vector<G4String> referenceList;
+  for (auto& scoringMesh : scoringMeshes)
+  {
+    referenceList.push_back(scoringMesh.referenceElement);
+
+    const auto duplicate = std::adjacent_find(referenceList.begin(), referenceList.end());
+    if (duplicate != referenceList.end())
+    {
+      std::cerr << "WARNING " << *duplicate << " has multiple scoring meshes assigned!" << std::endl;
+    }
+  }
 
   G4ScoringManager* scManager = G4ScoringManager::GetScoringManager();
   scManager->SetVerboseLevel(1);

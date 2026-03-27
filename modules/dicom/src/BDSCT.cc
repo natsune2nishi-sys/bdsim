@@ -1529,5 +1529,26 @@ void BDSCT::BuildUserLimits()
 
 void BDSCT::SetScorer(G4LogicalVolume *voxel_logic)
 {
-  fScorers.insert(voxel_logic);
+	auto mesh = GMAD::ScorerMesh();
+
+	//auto ne = mesh.name;
+	mesh.name = name;
+	mesh.geometryType = "box";
+	mesh.nx = fNVoxelX; //these should be set
+	mesh.ny = fNVoxelY;
+	mesh.nz = fNVoxelZ;
+	mesh.xsize = (fMaxX - fMinX)/CLHEP::m;
+	mesh.ysize = (fMaxY - fMinY)/CLHEP::m;
+	mesh.zsize = (fMaxZ - fMinZ)/CLHEP::m; //in mm
+
+	if (dicomScorer == "")
+	{
+		G4String message="DICOM element requires dicomScorer parameter to be set!";
+		throw BDSException(name, message);
+	}
+	mesh.scoreQuantity = dicomScorer;
+
+	mesh.referenceElement = name;
+
+	fScorerMesh = mesh;
 }

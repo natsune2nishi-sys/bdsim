@@ -25,6 +25,7 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <fstream>
 #include <map>
+#include "parser/scorermesh.h"
 #include <set>
 #include <vector>
 
@@ -64,6 +65,8 @@ public:
 
   /// Override base class version.
   virtual G4String Material() const override { return "infiniteabsorber"; }
+
+  GMAD::ScorerMesh GetScorerMesh() { return fScorerMesh;}
 
 protected:
   /// Call default build then override visualisation attributes.
@@ -128,7 +131,8 @@ private:
   /// Map numberOfMaterial to G4Material. They are the list of materials as built from .geom file
   std::map<G4int, G4Material*> thePhantomMaterialsOriginal;
 
-  std::set<G4LogicalVolume*> fScorers;
+  //std::set<G4LogicalVolume*> fScorers;
+  GMAD::ScorerMesh fScorerMesh;
   G4bool fConstructed;
   BDSDicomFileMgr* theFileMgr;
   G4String dicomDataPath;
