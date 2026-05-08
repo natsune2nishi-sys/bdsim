@@ -66,7 +66,7 @@ public:
   /// Override base class version.
   virtual G4String Material() const override { return "infiniteabsorber"; }
 
-  GMAD::ScorerMesh GetScorerMesh() { return fScorerMesh;}
+  GMAD::ScorerMesh GetScorerMesh() const { return fScorerMesh;}
 
 protected:
   /// Call default build then override visualisation attributes.
@@ -101,7 +101,7 @@ private:
   /// Construct the phantom volumes. This method should be implemented for each of the derived classes.
   void BuildPhantom();
 
-  void SetScorer(G4LogicalVolume* voxel_logic);
+  void SetScorer();
 
   G4Material* fAir;
 
@@ -133,7 +133,7 @@ private:
 
   //std::set<G4LogicalVolume*> fScorers;
   GMAD::ScorerMesh fScorerMesh;
-  G4bool fConstructed;
+  G4bool fConstructed = false;
   BDSDicomFileMgr* theFileMgr;
   G4String dicomDataPath;
   G4String dicomDataFile;
