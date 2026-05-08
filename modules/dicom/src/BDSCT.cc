@@ -73,19 +73,19 @@ void BDSCT::Build()
       G4double worldYDimension = 1. * CLHEP::m;
       G4double worldZDimension = 1. * CLHEP::m;
       
-      fWorld_solid = new G4Box("WorldSolid",
+      fWorld_solid = new G4Box("WorldSolid_DICOM",
 			       worldXDimension,
 			       worldYDimension,
 			       worldZDimension);
       
       fWorld_logic = new G4LogicalVolume(fWorld_solid,
 					 fAir,
-					 "WorldLogical",
+					 "WorldLogical_DICOM",
 					 nullptr, nullptr, nullptr);
       
       fWorld_phys = new G4PVPlacement(nullptr,
 				      G4ThreeVector(0, 0, 0),
-				      "World",
+				      "World_DICOM",
 				      fWorld_logic,
 				      nullptr,
 				      false,
@@ -155,7 +155,7 @@ void BDSCT::BuildPhantom()
   phantom_phys->SetRegularStructureId(1); // if not set, G4VoxelNavigation
   // will be used instead
   
-  SetScorer(voxel_logic);
+  SetScorer();
 }
 
 void BDSCT::InitialisationOfMaterials()
@@ -1527,28 +1527,29 @@ void BDSCT::BuildUserLimits()
   RegisterUserLimits(userLimits);
 }
 
-void BDSCT::SetScorer(G4LogicalVolume *voxel_logic)
+void BDSCT::SetScorer()
 {
-	auto mesh = GMAD::ScorerMesh();
+	// Reset scorer mesh to a known clean state
+	fScorerMesh.clear();
 
-	//auto ne = mesh.name;
-	mesh.name = name;
-	mesh.geometryType = "box";
-	mesh.nx = fNVoxelX; //these should be set
-	mesh.ny = fNVoxelY;
-	mesh.nz = fNVoxelZ;
-	mesh.xsize = (fMaxX - fMinX)/CLHEP::m;
-	mesh.ysize = (fMaxY - fMinY)/CLHEP::m;
-	mesh.zsize = (fMaxZ - fMinZ)/CLHEP::m; //in mm
+	// Fill member directly
+	fScorerMesh.name         = name;
+	fScorerMesh.geometryType = "box";
+
+	fScorerMesh.nx = fNVoxelX;
+	fScorerMesh.ny = fNVoxelY;
+	fScorerMesh.nz = fNVoxelZ;
+
+	fScorerMesh.xsize = (fMaxX - fMinX) / CLHEP::m;
+	fScorerMesh.ysize = (fMaxY - fMinY) / CLHEP::m;
+	fScorerMesh.zsize = (fMaxZ - fMinZ) / CLHEP::m;
 
 	if (dicomScorer == "")
 	{
-		G4String message="DICOM element requires dicomScorer parameter to be set!";
+		G4String message = "DICOM element requires dicomScorer parameter to be set!";
 		throw BDSException(name, message);
 	}
-	mesh.scoreQuantity = dicomScorer;
 
-	mesh.referenceElement = name;
-
-	fScorerMesh = mesh;
+	fScorerMesh.scoreQuantity    = dicomScorer;
+	fScorerMesh.referenceElement = name;
 }
