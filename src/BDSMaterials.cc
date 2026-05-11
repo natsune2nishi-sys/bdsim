@@ -78,6 +78,7 @@ void BDSMaterials::DefineMetals()
   // standard single element metals
   AddExistingMaterialAlias("Al", "aluminium");
   AddExistingMaterialAlias("Be", "beryllium");
+  AddExistingMaterialAlias("Ca", "calcium");
   AddExistingMaterialAlias("C",  "carbon");
   AddExistingMaterialAlias("Cr", "chromium");
   AddExistingMaterialAlias("Cu", "copper");
@@ -85,7 +86,11 @@ void BDSMaterials::DefineMetals()
   AddExistingMaterialAlias("Pb", "lead");
   AddExistingMaterialAlias("Mg", "magnesium");
   AddExistingMaterialAlias("Ni", "nickel");
+  AddExistingMaterialAlias("P", "phosphorus");
+  AddExistingMaterialAlias("K", "Potassium");
   AddExistingMaterialAlias("Si", "silicon");
+  AddExistingMaterialAlias("Na", "sodium");
+  AddExistingMaterialAlias("S", "sulfur");
   AddExistingMaterialAlias("Ti", "titanium");
   AddExistingMaterialAlias("W",  "tungsten");
   AddExistingMaterialAlias("U",  "uranium");
@@ -846,7 +851,10 @@ void BDSMaterials::DefineLiquids()
 
 void BDSMaterials::DefineGases()
 {
-  AddExistingMaterialAlias("N", "nitrogen");
+	AddExistingMaterialAlias("Cl", "chlorine");
+	AddExistingMaterialAlias("H", "hydrogen");
+	AddExistingMaterialAlias("N", "nitrogen");
+	AddExistingMaterialAlias("O", "oxygen");
 
   // air
   AddExistingMaterialAlias("G4_AIR", "air");
