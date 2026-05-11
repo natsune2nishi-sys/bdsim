@@ -1529,27 +1529,33 @@ void BDSCT::BuildUserLimits()
 
 void BDSCT::SetScorer()
 {
-	// Reset scorer mesh to a known clean state
-	fScorerMesh.clear();
+	G4bool scorer_option = BDSGlobalConstants::Instance()->createDicomScorerMesh();
+	if (scorer_option)
+	  {
+		// Reset scorer mesh to a known clean state
+		fScorerMesh.clear();
 
-	// Fill member directly
-	fScorerMesh.name         = name;
-	fScorerMesh.geometryType = "box";
+		// Fill member directly
+		fScorerMesh.name         = name;
+		fScorerMesh.geometryType = "box";
 
-	fScorerMesh.nx = fNVoxelX;
-	fScorerMesh.ny = fNVoxelY;
-	fScorerMesh.nz = fNVoxelZ;
+		fScorerMesh.nx = fNVoxelX;
+		fScorerMesh.ny = fNVoxelY;
+		fScorerMesh.nz = fNVoxelZ;
 
-	fScorerMesh.xsize = (fMaxX - fMinX) / CLHEP::m;
-	fScorerMesh.ysize = (fMaxY - fMinY) / CLHEP::m;
-	fScorerMesh.zsize = (fMaxZ - fMinZ) / CLHEP::m;
+		fScorerMesh.xsize = (fMaxX - fMinX) / CLHEP::m;
+		fScorerMesh.ysize = (fMaxY - fMinY) / CLHEP::m;
+		fScorerMesh.zsize = (fMaxZ - fMinZ) / CLHEP::m;
 
-	if (dicomScorer == "")
-	{
-		G4String message = "DICOM element requires dicomScorer parameter to be set!";
-		throw BDSException(name, message);
-	}
+		if (dicomScorer == "")
+		  {
+			G4String message = "DICOM element requires dicomScorer parameter to be set!";
+			throw BDSException(name, message);
+		  }
 
-	fScorerMesh.scoreQuantity    = dicomScorer;
-	fScorerMesh.referenceElement = name;
+		fScorerMesh.scoreQuantity    = dicomScorer;
+		fScorerMesh.referenceElement = name;
+	  }
+	else
+	  {G4cout << "Automatic DICOM scoring mesh is turned off!" << G4endl;}
 }

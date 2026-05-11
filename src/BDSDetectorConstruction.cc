@@ -501,25 +501,17 @@ BDSBeamlineSet BDSDetectorConstruction::BuildBeamline(const GMAD::FastList<GMAD:
           #ifdef USE_DICOM
           mesh_option = BDSGlobalConstants::Instance()->createDicomScorerMesh();
           if (mesh_option && temp->GetType() == "ct")
-          {
-            auto ct = dynamic_cast<BDSCT*>(temp);
-
-            if (!ct)
             {
-              throw BDSException(__METHOD_NAME__, "Failed to cast temp to BDSCT");
-            }
+              auto ct = dynamic_cast<BDSCT*>(temp);
+              if (!ct)
+                {throw BDSException(__METHOD_NAME__, "Failed to cast temp to BDSCT");}
 
-            const auto& mesh = ct->GetScorerMesh();
-
-            if (mesh.nx == 0 || mesh.ny == 0 || mesh.nz == 0)
-            {
-              G4cerr << "WARNING: CT scorer mesh requested before SetScorer initialisation for " << temp->GetName() << G4endl;
+              const auto& mesh = ct->GetScorerMesh();
+              if (mesh.nx == 0 || mesh.ny == 0 || mesh.nz == 0)
+                {G4cerr << "WARNING: CT scorer mesh requested before SetScorer initialisation for " << temp->GetName() << G4endl;}
+              else
+                {perElementScoringMeshes.push_back(mesh);}
             }
-            else
-            {
-              perElementScoringMeshes.push_back(mesh);
-            }
-          }
           #endif
         }
     }
@@ -1395,35 +1387,35 @@ void BDSDetectorConstruction::ConstructScoringMeshes()
 
   const BDSBeamline* mbl = BDSAcceleratorModel::Instance()->BeamlineMain();
 
-   for (const auto& mesh : perElementScoringMeshes)
-   {
-     G4String mesh_ref = mesh.referenceElement;
-     const BDSBeamlineElement* ct_element = mbl->GetElement(mesh_ref);
-     if (const BDSTiltOffset* tiltOffSet = ct_element->GetTiltOffset())
-       {
-         perElementScoringMeshes.at(0).axisAngle = true;
-         perElementScoringMeshes.at(0).axisZ = 1;
-         perElementScoringMeshes.at(0).angle = tiltOffSet->GetTilt();
-         perElementScoringMeshes.at(0).x = tiltOffSet->GetXOffset();
-         perElementScoringMeshes.at(0).y = tiltOffSet->GetYOffset();
-       }
-     scoringMeshes.push_back(mesh);
-   }
+  G4int mn = 0;
+  for (const auto& mesh : perElementScoringMeshes)
+    {
+      G4String mesh_ref = mesh.referenceElement;
+      const BDSBeamlineElement* ct_element = mbl->GetElement(mesh_ref);
+      if (const BDSTiltOffset* tiltOffSet = ct_element->GetTiltOffset())
+        {
+          perElementScoringMeshes.at(mn).axisAngle = true;
+          perElementScoringMeshes.at(mn).axisZ = 1;
+          perElementScoringMeshes.at(mn).angle = tiltOffSet->GetTilt();
+          perElementScoringMeshes.at(mn).x = tiltOffSet->GetXOffset();
+          perElementScoringMeshes.at(mn).y = tiltOffSet->GetYOffset();
+        }
+      scoringMeshes.push_back(mesh);
+      mn++;
+    }
 
   if (scoringMeshes.empty())
     {return;}
 
   std::vector<G4String> referenceList;
   for (auto& scoringMesh : scoringMeshes)
-  {
-    referenceList.push_back(scoringMesh.referenceElement);
-
-    const auto duplicate = std::adjacent_find(referenceList.begin(), referenceList.end());
-    if (duplicate != referenceList.end())
     {
-      std::cerr << "WARNING " << *duplicate << " has multiple scoring meshes assigned!" << std::endl;
+      referenceList.push_back(scoringMesh.referenceElement);
+
+      const auto duplicate = std::adjacent_find(referenceList.begin(), referenceList.end());
+      if (duplicate != referenceList.end())
+        {std::cerr << "WARNING " << *duplicate << " has multiple scoring meshes assigned!" << std::endl;}
     }
-  }
 
   G4ScoringManager* scManager = G4ScoringManager::GetScoringManager();
   scManager->SetVerboseLevel(1);
