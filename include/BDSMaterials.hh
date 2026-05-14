@@ -123,6 +123,7 @@ private:
   void DefineGases();
   void DefinePlasmas();
   void DefineVacuums();
+  void DefineMedical();
   ///@}
 
   ///@{ Add a G4Element

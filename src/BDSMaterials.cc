@@ -63,6 +63,10 @@ BDSMaterials::BDSMaterials()
   DefineGases();
   DefinePlasmas();
   DefineVacuums();
+
+#ifdef USE_DICOM
+  DefineMedical();
+#endif
 }
 
 void BDSMaterials::DefineMetals()
@@ -955,6 +959,912 @@ void BDSMaterials::DefineVacuums()
 					regularVacuum->GetTemperature(),
 					regularVacuum->GetPressure());
   AddMaterial(laservac, "laservac");
+}
+
+void BDSMaterials::DefineMedical()
+{
+	AddMaterial("SoftTissue",
+		  1.00,
+		  kStateSolid, 300, 1,
+		  {"H","C","N", "O","Na","Mg","P", "S", "Cl", "K","Ca","Fe", "Zn"},
+		  std::list<double>{10.4472 *CLHEP::perCent,
+		  23.219 *CLHEP::perCent,
+		  2.488 *CLHEP::perCent,
+		  63.0238 *CLHEP::perCent,
+		  0.113 *CLHEP::perCent,
+		  0.0113 *CLHEP::perCent,
+		  0.113 *CLHEP::perCent,
+		  0.199 *CLHEP::perCent,
+		  0.134 *CLHEP::perCent,
+		  0.199 *CLHEP::perCent,
+		  0.023 *CLHEP::perCent,
+		  0.005 *CLHEP::perCent,
+		  0.003  *CLHEP::perCent,
+		  });
+
+	AddMaterial("lunginhale_0.557",
+			  0.557,
+			  kStateSolid, 300, 1,
+			  {"H","C","N", "O","Na","P", "S", "Cl", "K"},
+			  std::list<double>{10.3 *CLHEP::perCent,
+			  10.5 *CLHEP::perCent,
+			  3.1 *CLHEP::perCent,
+			  74.9 *CLHEP::perCent,
+			  0.2 *CLHEP::perCent,
+			  0.2 *CLHEP::perCent,
+			  0.3 *CLHEP::perCent,
+			  0.2 *CLHEP::perCent,
+			  0.3 *CLHEP::perCent,
+			  });
+
+	AddMaterial("LungInhale",
+		  0.217,
+		  kStateSolid, 300, 1,
+		  {"H","C","N", "O","Na","P", "S", "Cl", "K"},
+		  std::list<double>{10.3 *CLHEP::perCent,
+		  10.5 *CLHEP::perCent,
+		  3.1 *CLHEP::perCent,
+		  74.9 *CLHEP::perCent,
+		  0.2 *CLHEP::perCent,
+		  0.2 *CLHEP::perCent,
+		  0.3 *CLHEP::perCent,
+		  0.2 *CLHEP::perCent,
+		  0.3 *CLHEP::perCent,
+		  });
+
+	AddMaterial("LungExhale",
+		  0.508,
+		  kStateSolid, 300, 1,
+		  {"H","C","N", "O","Na","P", "S", "Cl", "K"},
+		  std::list<double>{10.3 *CLHEP::perCent,
+		  10.5 *CLHEP::perCent,
+		  3.1 *CLHEP::perCent,
+		  74.9 *CLHEP::perCent,
+		  0.2 *CLHEP::perCent,
+		  0.2 *CLHEP::perCent,
+		  0.3 *CLHEP::perCent,
+		  0.2 *CLHEP::perCent,
+		  0.3 *CLHEP::perCent,
+		  });
+
+	AddMaterial("AdiposeTissue",
+		  0.967,
+		  kStateSolid, 300, 1,
+		  {"H","C","N", "O","Na","S", "Cl"},
+		  std::list<double>{11.4 *CLHEP::perCent,
+		  59.8 *CLHEP::perCent,
+		  0.7 *CLHEP::perCent,
+		  27.8 *CLHEP::perCent,
+		  0.1 *CLHEP::perCent,
+		  0.1 *CLHEP::perCent,
+		  0.1 *CLHEP::perCent
+		  });
+
+	AddMaterial("BrainTissue",
+		  1.03,
+		  kStateSolid, 300, 1,
+		  {"H","C","N", "O","Na","Mg","P", "S", "Cl", "K","Ca","Fe", "Zn"},
+		  std::list<double>{11.0667 *CLHEP::perCent,
+		  12.542 *CLHEP::perCent,
+		  1.328 *CLHEP::perCent,
+		  73.7723 *CLHEP::perCent,
+		  0.1840 *CLHEP::perCent,
+		  0.015 *CLHEP::perCent,
+		  0.356 *CLHEP::perCent,
+		  0.177 *CLHEP::perCent,
+		  0.236 *CLHEP::perCent,
+		  0.31 *CLHEP::perCent,
+		  0.009 *CLHEP::perCent,
+		  0.005 *CLHEP::perCent,
+		  0.001  *CLHEP::perCent,
+		  });
+
+	AddMaterial("Breast",
+		  0.990,
+		  kStateSolid, 300, 1,
+		  {"H","C","N", "O","Na", "P", "S", "Cl"},
+		  std::list<double>{10.9 *CLHEP::perCent,
+		  50.6 *CLHEP::perCent,
+		  2.3 *CLHEP::perCent,
+		  35.8 *CLHEP::perCent,
+		  0.1 *CLHEP::perCent,
+		  0.1 *CLHEP::perCent,
+		  0.1 *CLHEP::perCent,
+		  0.1 *CLHEP::perCent
+		  });
+
+	AddMaterial("SpinalDisc",
+		  1.10,
+		  kStateSolid, 300, 1,
+		  {"H","C","N", "O","Na", "P", "S", "Cl"},
+		  std::list<double>{9.60 *CLHEP::perCent,
+		  9.90 *CLHEP::perCent,
+		  2.20 *CLHEP::perCent,
+		  74.40 *CLHEP::perCent,
+		  0.5 *CLHEP::perCent,
+		  2.20 *CLHEP::perCent,
+		  0.90 *CLHEP::perCent,
+		  0.30 *CLHEP::perCent
+		  });
+
+	AddMaterial("Muscle", 1.061, kStateSolid, 300, 1,
+		{"H","C","N", "O","Na", "P", "S", "Cl", "K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		14.3 *CLHEP::perCent,
+	    3.4 *CLHEP::perCent,
+	    71.0 *CLHEP::perCent,
+	    0.1 *CLHEP::perCent,
+	    0.2 *CLHEP::perCent,
+	    0.3 *CLHEP::perCent,
+	    0.1 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("Liver", 1.071, kStateSolid, 300, 1,
+		{"H","C","N", "O","Na", "P", "S", "Cl", "K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		13.9 *CLHEP::perCent,
+		3.0 *CLHEP::perCent,
+		71.6 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.3 *CLHEP::perCent,
+		0.3 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.3 *CLHEP::perCent});
+
+	AddMaterial("ToothDentin", 2.14, kStateSolid, 300, 1,
+		{"H","C","N", "O","Na", "Mg", "P",  "Cl", "Ca", "Zn"},
+		std::list<double>{2.67 *CLHEP::perCent,
+		12.77 *CLHEP::perCent,
+		4.27 *CLHEP::perCent,
+		40.40 *CLHEP::perCent,
+		0.65 *CLHEP::perCent,
+		0.59 *CLHEP::perCent,
+		11.86 *CLHEP::perCent,
+		0.04 *CLHEP::perCent,
+		26.74 *CLHEP::perCent,
+		0.01 *CLHEP::perCent});
+
+	AddMaterial("TrabecularBone", 1.159, kStateSolid, 300, 1,
+		{"H","C","N", "O","Na", "Mg", "P",  "S", "Cl", "K", "Ca", "Fe"},
+		std::list<double>{8.5 *CLHEP::perCent,
+		40.4 *CLHEP::perCent,
+		5.8 *CLHEP::perCent,
+		36.7 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		3.4 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		4.4 *CLHEP::perCent,
+		0.1 *CLHEP::perCent});
+
+	AddMaterial("TrabecularBone_HEAD", 1.18, kStateSolid, 300, 1,
+		{"H","C","N", "O","Na", "Mg", "P",  "S", "Cl", "K", "Ca", "Fe"},
+		std::list<double>{8.5 *CLHEP::perCent,
+		40.4 *CLHEP::perCent,
+		2.80 *CLHEP::perCent,
+		36.70 *CLHEP::perCent,
+		0.10 *CLHEP::perCent,
+		0.10 *CLHEP::perCent,
+		3.40 *CLHEP::perCent,
+		0.20 *CLHEP::perCent,
+		0.20 *CLHEP::perCent,
+		0.10 *CLHEP::perCent,
+		7.40 *CLHEP::perCent,
+		0.10 *CLHEP::perCent});
+
+	AddMaterial("DenseBone", 1.575, kStateSolid, 300, 1,
+		{"H","C","N", "O","Na", "Mg", "P",  "S", "Cl", "K", "Ca"},
+		std::list<double>{5.6 *CLHEP::perCent,
+		23.5 *CLHEP::perCent,
+		5.0 *CLHEP::perCent,
+		43.4 *CLHEP::perCent,
+		0.10 *CLHEP::perCent,
+		0.10 *CLHEP::perCent,
+		7.2 *CLHEP::perCent,
+		0.30 *CLHEP::perCent,
+		0.10 *CLHEP::perCent,
+		0.10 *CLHEP::perCent,
+		14.6 *CLHEP::perCent});
+
+	AddMaterial("CorticalBone1", 1.85, kStateSolid, 300, 1,
+		{"H","C","N", "O", "Mg", "P",  "S", "Ca", "Zn"},
+		std::list<double>{4.7234 *CLHEP::perCent,
+		14.4330 *CLHEP::perCent,
+		4.199 *CLHEP::perCent,
+		44.6096 *CLHEP::perCent,
+		0.22 *CLHEP::perCent,
+		10.497 *CLHEP::perCent,
+		0.315 *CLHEP::perCent,
+		20.993 *CLHEP::perCent,
+		0.01 *CLHEP::perCent});
+
+	AddMaterial("ToothEnamel", 2.89, kStateSolid, 300, 1,
+		{"H","C","N", "O", "Na", "Mg", "P", "Cl","Ca", "Zn"},
+		std::list<double>{0.95 *CLHEP::perCent,
+		1.11 *CLHEP::perCent,
+		0.23 *CLHEP::perCent,
+		41.66 *CLHEP::perCent,
+		0.79 *CLHEP::perCent,
+		0.23 *CLHEP::perCent,
+		18.71 *CLHEP::perCent,
+		0.34 *CLHEP::perCent,
+		35.97 *CLHEP::perCent,
+		0.02 *CLHEP::perCent});
+
+	AddMaterial("LungBloodFilled", 0.26, kStateSolid, 300, 1,
+		{"H","C","N", "O","P", "K"},
+		std::list<double>{10.3 *CLHEP::perCent,
+		10.5 *CLHEP::perCent,
+		3.1 *CLHEP::perCent,
+		74.9 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		1.0 *CLHEP::perCent});
+
+	AddMaterial("AdiposeTissue1", 0.97, kStateSolid, 300, 1,
+		{"H","C","N", "O", "K"},
+		std::list<double>{11.2 *CLHEP::perCent,
+		51.7 *CLHEP::perCent,
+		1.3 *CLHEP::perCent,
+		35.5 *CLHEP::perCent,
+		0.3 *CLHEP::perCent});
+
+	AddMaterial("AdiposeTissue2", 0.95, kStateSolid, 300, 1,
+		{"H","C","N", "O", "K"},
+		std::list<double>{11.4 *CLHEP::perCent,
+		59.8 *CLHEP::perCent,
+		0.7 *CLHEP::perCent,
+		27.8 *CLHEP::perCent,
+		0.3 *CLHEP::perCent});
+
+	AddMaterial("AdiposeTissue3", 0.93, kStateSolid, 300, 1,
+		{"H","C","N", "O", "K"},
+		std::list<double>{11.6 *CLHEP::perCent,
+		68.1 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		19.8 *CLHEP::perCent,
+		0.3 *CLHEP::perCent});
+
+	AddMaterial("MammaryGland1", 0.99, kStateSolid, 300, 1,
+		{"H","C","N", "O", "P", "K"},
+		std::list<double>{10.9 *CLHEP::perCent,
+		50.6 *CLHEP::perCent,
+		2.3 *CLHEP::perCent,
+		35.8 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.3 *CLHEP::perCent});
+
+	AddMaterial("MammaryGland2", 1.02, kStateSolid, 300, 1,
+		{"H","C","N", "O", "P", "K"},
+		std::list<double>{10.6 *CLHEP::perCent,
+		33.2 *CLHEP::perCent,
+		3.0 *CLHEP::perCent,
+		52.8 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.3 *CLHEP::perCent});
+
+	AddMaterial("AdrenalGland", 1.03, kStateSolid, 300, 1,
+		{"H","C","N", "O", "P", "K"},
+		std::list<double>{10.6 *CLHEP::perCent,
+		28.4 *CLHEP::perCent,
+		2.6 *CLHEP::perCent,
+		57.8 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.5 *CLHEP::perCent});
+
+	AddMaterial("SmallIntestineWall", 1.03, kStateSolid, 300, 1,
+		{"H","C","N", "O", "P", "K"},
+		std::list<double>{10.6 *CLHEP::perCent,
+		11.5 *CLHEP::perCent,
+		2.2 *CLHEP::perCent,
+		75.1 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.5 *CLHEP::perCent});
+
+	AddMaterial("CerebrospinalFluid", 1.01, kStateSolid, 300, 1,
+		{"H","O","K"},
+		std::list<double>{11.1 *CLHEP::perCent,
+		88.0 *CLHEP::perCent,
+		0.9 *CLHEP::perCent});
+
+	AddMaterial("Urine", 1.02, kStateSolid, 300, 1,
+		{"H","C","N", "O", "P", "K", "Na"},
+		std::list<double>{11.0 *CLHEP::perCent,
+		0.5 *CLHEP::perCent,
+		1.0 *CLHEP::perCent,
+		86.2 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		1.0 *CLHEP::perCent});
+
+	AddMaterial("GallbladderBile", 1.03, kStateSolid, 300, 1,
+		{"H","C","N","O","K"},
+		std::list<double>{10.8 *CLHEP::perCent,
+		6.1 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		82.2 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("Lymph", 1.03, kStateSolid, 300, 1,
+		{"H","C","N","O","K"},
+		std::list<double>{10.8 *CLHEP::perCent,
+		4.1 *CLHEP::perCent,
+		1.1 *CLHEP::perCent,
+		83.2 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("Pancreas", 1.04, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.6 *CLHEP::perCent,
+		16.9 *CLHEP::perCent,
+		2.2 *CLHEP::perCent,
+		69.4 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("Prostate", 1.04, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.5 *CLHEP::perCent,
+		8.9 *CLHEP::perCent,
+		2.5 *CLHEP::perCent,
+		77.4 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("WhiteMatter", 1.04, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.6 *CLHEP::perCent,
+		19.4 *CLHEP::perCent,
+		2.5 *CLHEP::perCent,
+		66.1 *CLHEP::perCent,
+		0.4 *CLHEP::perCent,
+		1.0 *CLHEP::perCent});
+
+	AddMaterial("Testis", 1.04, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.6 *CLHEP::perCent,
+		9.9 *CLHEP::perCent,
+		2.0 *CLHEP::perCent,
+		76.6 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("GreyMatter", 1.04, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.7 *CLHEP::perCent,
+		9.5 *CLHEP::perCent,
+		1.8 *CLHEP::perCent,
+		76.7 *CLHEP::perCent,
+		0.3 *CLHEP::perCent,
+		1.0 *CLHEP::perCent});
+
+	AddMaterial("MuscleSkeletal1", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.1 *CLHEP::perCent,
+		17.1 *CLHEP::perCent,
+		3.6 *CLHEP::perCent,
+		68.1 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.9 *CLHEP::perCent});
+
+	AddMaterial("Stomach", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.4 *CLHEP::perCent,
+		13.9 *CLHEP::perCent,
+		2.9 *CLHEP::perCent,
+		72.1 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("Heart1", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.3 *CLHEP::perCent,
+		17.5 *CLHEP::perCent,
+		3.1 *CLHEP::perCent,
+		68.1 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("Kidney1", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca", "K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		16.0 *CLHEP::perCent,
+		3.4 *CLHEP::perCent,
+		69.3 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("Thyroid", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.4 *CLHEP::perCent,
+		11.9 *CLHEP::perCent,
+		2.4 *CLHEP::perCent,
+		74.5 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("Aorta", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca", "K"},
+		std::list<double>{9.9 *CLHEP::perCent,
+		14.7 *CLHEP::perCent,
+		4.2 *CLHEP::perCent,
+		69.8 *CLHEP::perCent,
+		0.4 *CLHEP::perCent,
+		0.4 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("Heart2", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.4 *CLHEP::perCent,
+		13.9 *CLHEP::perCent,
+		2.9 *CLHEP::perCent,
+		71.8 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("Kidney2", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca", "K"},
+		std::list<double>{10.3 *CLHEP::perCent,
+		13.2 *CLHEP::perCent,
+		3.0 *CLHEP::perCent,
+		72.4 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("Liver1", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P", "K"},
+		std::list<double>{10.3 *CLHEP::perCent,
+		15.6 *CLHEP::perCent,
+		2.7 *CLHEP::perCent,
+		70.1 *CLHEP::perCent,
+		0.3 *CLHEP::perCent,
+		1.0 *CLHEP::perCent});
+
+	AddMaterial("MuscleSkeletal2", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P", "K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		14.3 *CLHEP::perCent,
+		3.4 *CLHEP::perCent,
+		71.0 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.9 *CLHEP::perCent});
+
+	AddMaterial("MuscleSkeletal3", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P", "K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		11.2 *CLHEP::perCent,
+		3.0 *CLHEP::perCent,
+		74.5 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.9 *CLHEP::perCent});
+
+	AddMaterial("Heart3", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P", "K"},
+		std::list<double>{10.4 *CLHEP::perCent,
+		10.3 *CLHEP::perCent,
+		2.7 *CLHEP::perCent,
+		75.6 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("MammaryGland3", 1.06, kStateSolid, 300, 1,
+		{"H","C","N", "O", "P", "K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		15.8 *CLHEP::perCent,
+		3.7 *CLHEP::perCent,
+		69.8 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("Kidney3", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca", "K"},
+		std::list<double>{10.4 *CLHEP::perCent,
+		10.6 *CLHEP::perCent,
+		2.7 *CLHEP::perCent,
+		75.2 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("Ovary", 1.05, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.5 *CLHEP::perCent,
+		9.3 *CLHEP::perCent,
+		2.4 *CLHEP::perCent,
+		76.8 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("EyeLens", 1.07, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{9.6 *CLHEP::perCent,
+		19.5 *CLHEP::perCent,
+		5.7 *CLHEP::perCent,
+		64.6 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.5 *CLHEP::perCent});
+
+	AddMaterial("Liver2", 1.06, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		13.9 *CLHEP::perCent,
+		3.0 *CLHEP::perCent,
+		71.6 *CLHEP::perCent,
+		0.3 *CLHEP::perCent,
+		1.0 *CLHEP::perCent});
+
+	AddMaterial("Trachea", 1.06, kStateSolid, 300, 1, //TODO: check where this comes from as its the same as the above liver2
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		13.9 *CLHEP::perCent,
+		3.0 *CLHEP::perCent,
+		71.6 *CLHEP::perCent,
+		0.3 *CLHEP::perCent,
+		1.0 *CLHEP::perCent});
+
+	AddMaterial("Spleen", 1.06, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.3 *CLHEP::perCent,
+		11.3 *CLHEP::perCent,
+		3.2 *CLHEP::perCent,
+		74.1 *CLHEP::perCent,
+		0.3 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("HeartBloodFilled", 1.06, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.3 *CLHEP::perCent,
+		12.1 *CLHEP::perCent,
+		3.2 *CLHEP::perCent,
+		73.4 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.9 *CLHEP::perCent});
+
+	AddMaterial("BloodWhole", 1.06, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.2 *CLHEP::perCent,
+		11.0 *CLHEP::perCent,
+		3.3 *CLHEP::perCent,
+		74.5 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.9 *CLHEP::perCent});
+
+	AddMaterial("Liver3", 1.07, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.1 *CLHEP::perCent,
+		12.6 *CLHEP::perCent,
+		3.3 *CLHEP::perCent,
+		72.7 *CLHEP::perCent,
+		0.3 *CLHEP::perCent,
+		1.0 *CLHEP::perCent});
+
+	AddMaterial("Skin1", 1.09, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.0 *CLHEP::perCent,
+		25.0 *CLHEP::perCent,
+		4.6 *CLHEP::perCent,
+		59.4 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.9 *CLHEP::perCent});
+
+	AddMaterial("Skin2", 1.09, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.0 *CLHEP::perCent,
+		20.4 *CLHEP::perCent,
+		4.2 *CLHEP::perCent,
+		64.5 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("Skin3", 1.09, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{10.1*CLHEP::perCent,
+		15.8 *CLHEP::perCent,
+		3.7*CLHEP::perCent,
+		69.5 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.8 *CLHEP::perCent});
+
+	AddMaterial("ConnectiveTissue", 1.09, kStateSolid, 300, 1,
+		{"H","C","N","O","K","Na","Cl"},
+		std::list<double>{9.4 *CLHEP::perCent,
+		20.7 *CLHEP::perCent,
+		6.2 *CLHEP::perCent,
+		62.2 *CLHEP::perCent,
+		0.8 *CLHEP::perCent,
+		0.2 *CLHEP::perCent,
+		0.5 *CLHEP::perCent});
+
+	AddMaterial("YellowMarrow", 0.98, kStateSolid, 300, 1,
+		{"H","C","N","O","K"},
+		std::list<double>{11.4 *CLHEP::perCent,
+		64.4 *CLHEP::perCent,
+		0.7 *CLHEP::perCent,
+		23.1 *CLHEP::perCent,
+		0.3 *CLHEP::perCent});
+
+	AddMaterial("YellowRedMarrow", 1.00, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K"},
+		std::list<double>{11.0 *CLHEP::perCent,
+		52.9 *CLHEP::perCent,
+		2.1 *CLHEP::perCent,
+		33.5 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("RedMarrow", 1.03, kStateSolid, 300, 1, //TODO: Yellow red marrow and Red marrow have the same densities and break down. Check!
+		{"H","C","N","O","P","K"},
+		std::list<double>{11.0 *CLHEP::perCent,
+		52.9 *CLHEP::perCent,
+		2.1 *CLHEP::perCent,
+		33.5 *CLHEP::perCent,
+		0.1 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("Cartilage", 1.1, kStateSolid, 300, 1,
+		{"H","C","N","O","P","K","Mg","S","Cl"},
+		std::list<double>{9.6 *CLHEP::perCent,
+		9.9 *CLHEP::perCent,
+		2.2 *CLHEP::perCent,
+		74.4 *CLHEP::perCent,
+		2.2 *CLHEP::perCent,
+		0.4 *CLHEP::perCent,
+		0.5 *CLHEP::perCent,
+		0.5 *CLHEP::perCent,
+		0.3 *CLHEP::perCent});
+
+	AddMaterial("Sternum", 1.25, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{7.8 *CLHEP::perCent,
+		31.6 *CLHEP::perCent,
+		3.7 *CLHEP::perCent,
+		43.8 *CLHEP::perCent,
+		4.0 *CLHEP::perCent,
+		8.5 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("SacrumMale", 1.29, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{7.4 *CLHEP::perCent,
+		30.2 *CLHEP::perCent,
+		3.7 *CLHEP::perCent,
+		43.8 *CLHEP::perCent,
+		4.5 *CLHEP::perCent,
+		9.8 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("D6L3IncludedCartilageMale", 1.3, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{7.3 *CLHEP::perCent,
+		26.5 *CLHEP::perCent,
+		3.6 *CLHEP::perCent,
+		47.3 *CLHEP::perCent,
+		4.8 *CLHEP::perCent,
+		9.8 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("WholeVertebralColumnMale", 1.33, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{7.1 *CLHEP::perCent,
+		25.8 *CLHEP::perCent,
+		3.6 *CLHEP::perCent,
+		47.2 *CLHEP::perCent,
+		5.1 *CLHEP::perCent,
+		10.5 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("D6L3ExcludedCartilageMale", 1.33, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{7.0 *CLHEP::perCent,
+		28.7 *CLHEP::perCent,
+		3.8 *CLHEP::perCent,
+		43.7 *CLHEP::perCent,
+		5.1 *CLHEP::perCent,
+		11.1 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("HumerusSphericalHead", 1.33, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{7.1 *CLHEP::perCent,
+		37.9 *CLHEP::perCent,
+		2.6 *CLHEP::perCent,
+		34.2 *CLHEP::perCent,
+		5.6 *CLHEP::perCent,
+		12.2 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("FemurSphericalHead", 1.33, kStateSolid, 300, 1, //TODO: Femur and Humerus is the same. Check!
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{7.1 *CLHEP::perCent,
+		37.9 *CLHEP::perCent,
+		2.6 *CLHEP::perCent,
+		34.2 *CLHEP::perCent,
+		5.6 *CLHEP::perCent,
+		12.2 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("FemurConicalTrochanter", 1.36, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.9 *CLHEP::perCent,
+		36.6 *CLHEP::perCent,
+		2.7 *CLHEP::perCent,
+		34.7 *CLHEP::perCent,
+		5.9 *CLHEP::perCent,
+		12.8 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("C4IncludedCartilageMale", 1.38, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.6 *CLHEP::perCent,
+		24.3 *CLHEP::perCent,
+		3.7 *CLHEP::perCent,
+		47.1 *CLHEP::perCent,
+		5.7 *CLHEP::perCent,
+		11.9 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("SacrumFemale", 1.39, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.6 *CLHEP::perCent,
+		27.1 *CLHEP::perCent,
+		3.8 *CLHEP::perCent,
+		43.5 *CLHEP::perCent,
+		5.8 *CLHEP::perCent,
+		12.5 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("HumerusWholeSpecimen", 1.39, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.7 *CLHEP::perCent,
+		35.2 *CLHEP::perCent,
+		2.8 *CLHEP::perCent,
+		35.2 *CLHEP::perCent,
+		6.2 *CLHEP::perCent,
+		13.5 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("Ribs2nd6thMale", 1.41, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.4 *CLHEP::perCent,
+		26.3 *CLHEP::perCent,
+		3.9 *CLHEP::perCent,
+		43.6 *CLHEP::perCent,
+		6.0 *CLHEP::perCent,
+		13.1 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("InnominateMale", 1.41, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.3 *CLHEP::perCent,
+		26.2 *CLHEP::perCent,
+		3.9 *CLHEP::perCent,
+		43.6 *CLHEP::perCent,
+		6.1 *CLHEP::perCent,
+		13.2 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("C4ExcludedCartilageMale", 1.42, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.3 *CLHEP::perCent,
+		26.1 *CLHEP::perCent,
+		3.9 *CLHEP::perCent,
+		43.6 *CLHEP::perCent,
+		6.1 *CLHEP::perCent,
+		13.3 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("FemurTotalBone", 1.42, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.3 *CLHEP::perCent,
+		33.3 *CLHEP::perCent,
+		2.9 *CLHEP::perCent,
+		36.2 *CLHEP::perCent,
+		6.6 *CLHEP::perCent,
+		14.3 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("FemurWholeSpecimen", 1.43, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.3 *CLHEP::perCent,
+		33.1 *CLHEP::perCent,
+		2.9 *CLHEP::perCent,
+		36.3 *CLHEP::perCent,
+		6.6 *CLHEP::perCent,
+		14.4 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("InnominateFemale", 1.46, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.0 *CLHEP::perCent,
+		25.0 *CLHEP::perCent,
+		3.9 *CLHEP::perCent,
+		46.3 *CLHEP::perCent,
+		6.6 *CLHEP::perCent,
+		14.3 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("ClavicleScapula", 1.46, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.0 *CLHEP::perCent,
+		31.3 *CLHEP::perCent,
+		3.1 *CLHEP::perCent,
+		37.0 *CLHEP::perCent,
+		7.0 *CLHEP::perCent,
+		15.2 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("HumerusTotalBone", 1.46, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{6.0 *CLHEP::perCent,
+		31.4 *CLHEP::perCent,
+		3.1 *CLHEP::perCent,
+		36.9 *CLHEP::perCent,
+		7.0 *CLHEP::perCent,
+		15.2 *CLHEP::perCent,
+		0.4 *CLHEP::perCent});
+
+	AddMaterial("HumerusCylindricalShaft", 1.49, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{5.8 *CLHEP::perCent,
+		30.1 *CLHEP::perCent,
+		3.2 *CLHEP::perCent,
+		37.4 *CLHEP::perCent,
+		7.2 *CLHEP::perCent,
+		15.8 *CLHEP::perCent,
+		0.5 *CLHEP::perCent});
+
+	AddMaterial("Ribs10thMale", 1.52, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{5.6 *CLHEP::perCent,
+		23.5 *CLHEP::perCent,
+		4.0 *CLHEP::perCent,
+		43.4 *CLHEP::perCent,
+		7.2 *CLHEP::perCent,
+		15.6 *CLHEP::perCent,
+		0.7 *CLHEP::perCent});
+
+	AddMaterial("Cranium", 1.61, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{5.0 *CLHEP::perCent,
+		21.2 *CLHEP::perCent,
+		4.0 *CLHEP::perCent,
+		43.5 *CLHEP::perCent,
+		8.1 *CLHEP::perCent,
+		17.6 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("Mandible", 1.68, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{4.6 *CLHEP::perCent,
+		19.2 *CLHEP::perCent,
+		4.1 *CLHEP::perCent,
+		43.5 *CLHEP::perCent,
+		8.6 *CLHEP::perCent,
+		18.7 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("FemurCylindricalShaft", 1.75, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{4.2 *CLHEP::perCent,
+		20.4 *CLHEP::perCent,
+		3.8 *CLHEP::perCent,
+		41.5 *CLHEP::perCent,
+		9.3 *CLHEP::perCent,
+		20.2 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
+
+	AddMaterial("CorticalBone2", 1.92, kStateSolid, 300, 1,
+		{"H","C","N","O","P","Ca","K"},
+		std::list<double>{3.4 *CLHEP::perCent,
+		15.5 *CLHEP::perCent,
+		4.2 *CLHEP::perCent,
+		43.5 *CLHEP::perCent,
+		10.3 *CLHEP::perCent,
+		22.5 *CLHEP::perCent,
+		0.6 *CLHEP::perCent});
 }
 
 void BDSMaterials::AddMaterial(G4Material* material, G4String name)
