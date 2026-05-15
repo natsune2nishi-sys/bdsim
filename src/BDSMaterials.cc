@@ -1496,13 +1496,13 @@ void BDSMaterials::DefineMedical()
 		0.3 *CLHEP::perCent,
 		1.0 *CLHEP::perCent});
 
-	AddMaterial("Trachea", 1.06, kStateSolid, 300, 1, //TODO: check where this comes from as its the same as the above liver2
+	AddMaterial("Trachea", 1.06, kStateSolid, 300, 1,
 		{"H","C","N","O","P","K"},
-		std::list<double>{10.2 *CLHEP::perCent,
+		std::list<double>{10.1 *CLHEP::perCent,
 		13.9 *CLHEP::perCent,
-		3.0 *CLHEP::perCent,
-		71.6 *CLHEP::perCent,
-		0.3 *CLHEP::perCent,
+		3.3 *CLHEP::perCent,
+		71.3 *CLHEP::perCent,
+		0.4 *CLHEP::perCent,
 		1.0 *CLHEP::perCent});
 
 	AddMaterial("Spleen", 1.06, kStateSolid, 300, 1,
@@ -1595,14 +1595,14 @@ void BDSMaterials::DefineMedical()
 		0.1 *CLHEP::perCent,
 		0.4 *CLHEP::perCent});
 
-	AddMaterial("RedMarrow", 1.03, kStateSolid, 300, 1, //TODO: Yellow red marrow and Red marrow have the same densities and break down. Check!
+	AddMaterial("RedMarrow", 1.03, kStateSolid, 300, 1,
 		{"H","C","N","O","P","K"},
-		std::list<double>{11.0 *CLHEP::perCent,
-		52.9 *CLHEP::perCent,
-		2.1 *CLHEP::perCent,
-		33.5 *CLHEP::perCent,
+		std::list<double>{10.5 *CLHEP::perCent,
+		41.4 *CLHEP::perCent,
+		3.4 *CLHEP::perCent,
+		43.9 *CLHEP::perCent,
 		0.1 *CLHEP::perCent,
-		0.4 *CLHEP::perCent});
+		0.7 *CLHEP::perCent});
 
 	AddMaterial("Cartilage", 1.1, kStateSolid, 300, 1,
 		{"H","C","N","O","P","K","Mg","S","Cl"},
@@ -1676,7 +1676,7 @@ void BDSMaterials::DefineMedical()
 		12.2 *CLHEP::perCent,
 		0.4 *CLHEP::perCent});
 
-	AddMaterial("FemurSphericalHead", 1.33, kStateSolid, 300, 1, //TODO: Femur and Humerus is the same. Check!
+	AddMaterial("FemurSphericalHead", 1.33, kStateSolid, 300, 1, //Femur and Humerus have the same density and composition (cross-referenced with paper)
 		{"H","C","N","O","P","Ca","K"},
 		std::list<double>{7.1 *CLHEP::perCent,
 		37.9 *CLHEP::perCent,
