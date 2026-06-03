@@ -1580,7 +1580,7 @@ void BDSMaterials::DefineMedical()
 
 	AddMaterial("YellowMarrow", 0.98, kStateSolid, 300, 1,
 		{"H","C","N","O","K"},
-		std::list<double>{11.4 *CLHEP::perCent,
+		std::list<double>{11.5 *CLHEP::perCent,
 		64.4 *CLHEP::perCent,
 		0.7 *CLHEP::perCent,
 		23.1 *CLHEP::perCent,
@@ -1781,7 +1781,7 @@ void BDSMaterials::DefineMedical()
 		std::list<double>{6.0 *CLHEP::perCent,
 		25.0 *CLHEP::perCent,
 		3.9 *CLHEP::perCent,
-		46.3 *CLHEP::perCent,
+		43.6 *CLHEP::perCent,
 		6.6 *CLHEP::perCent,
 		14.3 *CLHEP::perCent,
 		0.7 *CLHEP::perCent});
@@ -1839,7 +1839,7 @@ void BDSMaterials::DefineMedical()
 	AddMaterial("Mandible", 1.68, kStateSolid, 300, 1,
 		{"H","C","N","O","P","Ca","K"},
 		std::list<double>{4.6 *CLHEP::perCent,
-		19.2 *CLHEP::perCent,
+		19.9 *CLHEP::perCent,
 		4.1 *CLHEP::perCent,
 		43.5 *CLHEP::perCent,
 		8.6 *CLHEP::perCent,
